@@ -6,6 +6,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   GithubAuthProvider,
+  signOut,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -27,11 +28,11 @@ export function registerUser(email, password) {
   return createUserWithEmailAndPassword(auth, email, password);
 }
 
-export function signIn(email, password) {
+export function login(email, password) {
   return signInWithEmailAndPassword(auth, email, password);
 }
 
-export function signInWithSocial(social) {
+export function loginWithSocial(social) {
   let provider;
   if (social === "google") {
     provider = new GoogleAuthProvider();
@@ -39,4 +40,8 @@ export function signInWithSocial(social) {
     provider = new GithubAuthProvider();
   }
   return signInWithPopup(auth, provider);
+}
+
+export function logout() {
+  return signOut(auth);
 }

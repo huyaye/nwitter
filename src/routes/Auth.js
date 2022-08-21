@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { registerUser, signIn, signInWithSocial } from "../fbase";
+import { registerUser, login, loginWithSocial } from "../fbase";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -24,7 +24,7 @@ const Auth = () => {
       if (newAccount) {
         data = await registerUser(email, password);
       } else {
-        data = await signIn(email, password);
+        data = await login(email, password);
       }
       console.log(data);
     } catch (error) {
@@ -37,7 +37,7 @@ const Auth = () => {
     const {
       target: { name },
     } = event;
-    let data = await signInWithSocial(name);
+    let data = await loginWithSocial(name);
     console.log(data);
   };
 
