@@ -8,6 +8,14 @@ import {
   GithubAuthProvider,
   signOut,
 } from "firebase/auth";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  doc,
+  deleteDoc,
+  updateDoc,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -22,6 +30,9 @@ const firebaseConfig = {
 // Initialize Firebase
 initializeApp(firebaseConfig);
 
+/**
+ * Auth
+ */
 export const auth = getAuth();
 
 export function registerUser(email, password) {
@@ -45,3 +56,30 @@ export function loginWithSocial(social) {
 export function logout() {
   return signOut(auth);
 }
+
+/**
+ * DB
+ */
+export const dbService = getFirestore();
+
+export function addNewNweet(nweet, creatorId) {
+  return addDoc(collection(dbService, "nweets"), {
+    text: nweet,
+    createdAt: Date.now(),
+    creatorId: creatorId,
+  });
+}
+
+export function deleteNweet(nweetId) {
+  const nweetTextRef = doc(dbService, "nweets", `${nweetId}`);
+  deleteDoc(nweetTextRef);
+}
+
+export function updateNweet(nweetId, nweetText) {
+  const nweetTextRef = doc(dbService, "nweets", `${nweetId}`);
+  updateDoc(nweetTextRef, { text: nweetText });
+}
+
+// export function getNweetsFromDB() {
+//   return getDocs(collection(dbService, "nweets"));
+// }
