@@ -5,7 +5,7 @@ import { logout, dbService } from "../fbase";
 
 const Profile = ({ userObj }) => {
   const history = useHistory();
-  const onLogoutClick = () => {
+  const onLogOutClick = () => {
     logout();
     history.push("/");
   };
@@ -26,10 +26,11 @@ const Profile = ({ userObj }) => {
   }, []);
 
   return (
-    <>
-      <form></form>
-      <button onClick={onLogoutClick}>Log Out</button>
-    </>
+    <div className="container">
+      <span className="formBtn cancelBtn logOut" onClick={onLogOutClick}>
+        Log Out
+      </span>
+    </div>
   );
 };
 
