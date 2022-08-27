@@ -16,6 +16,14 @@ import {
   deleteDoc,
   updateDoc,
 } from "firebase/firestore";
+import {
+  getStorage,
+  ref,
+  uploadString,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
+import { v4 } from "uuid";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -62,11 +70,12 @@ export function logout() {
  */
 export const dbService = getFirestore();
 
-export function addNewNweet(nweet, creatorId) {
+export function addNewNweet(nweet, attachmentUrl, creatorId) {
   return addDoc(collection(dbService, "nweets"), {
     text: nweet,
     createdAt: Date.now(),
     creatorId: creatorId,
+    attachmentUrl: attachmentUrl,
   });
 }
 
@@ -80,6 +89,20 @@ export function updateNweet(nweetId, nweetText) {
   updateDoc(nweetTextRef, { text: nweetText });
 }
 
-// export function getNweetsFromDB() {
-//   return getDocs(collection(dbService, "nweets"));
-// }
+/**
+ * File
+ */
+export async function uploadAttachment(uid, attachment) {
+  const storageService = getStorage();
+  const attachmentRef = ref(storageService, `${uid}/${v4()}`);
+  await uploadString(attachmentRef, attachment, "data_url");
+  return await getDownloadURL(ref(storageService, attachmentRef));
+}
+
+export function deleteAttachment(attachmentUrl) {
+  if (attachmentUrl !== "") {
+    const storageService = getStorage();
+    const attachmentRef = ref(storageService, attachmentUrl);
+    deleteObject(attachmentRef);
+  }
+}

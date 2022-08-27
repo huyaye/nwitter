@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { deleteNweet, updateNweet } from "../fbase";
+import { deleteNweet, updateNweet, deleteAttachment } from "../fbase";
 
 const Nweet = ({ nweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -8,8 +8,8 @@ const Nweet = ({ nweetObj, isOwner }) => {
   const onDeleteClick = () => {
     const ok = window.confirm("Are you sure you want to delete?");
     if (ok) {
-      // delete nweet
       deleteNweet(nweetObj.id);
+      deleteAttachment(nweetObj.attachmentUrl);
     }
   };
   const toggleEditing = () => setEditing((prev) => !prev);
@@ -44,6 +44,11 @@ const Nweet = ({ nweetObj, isOwner }) => {
       ) : (
         <>
           <h4>{nweetObj.text}</h4>
+          {nweetObj.attachmentUrl && (
+            <div>
+              <img src={nweetObj.attachmentUrl} width="50px" height="50px" />
+            </div>
+          )}
           {isOwner && (
             <>
               <button onClick={onDeleteClick}>Delete Nweet</button>
