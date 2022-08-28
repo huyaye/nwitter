@@ -1,0 +1,13 @@
+{
+  "main.css": "/nwitter/static/css/main.17fae33f.chunk.css",
+  "main.js": "/nwitter/static/js/main.b80b6901.chunk.js",
+  "main.js.map": "/nwitter/static/js/main.b80b6901.chunk.js.map",
+  "static/js/1.8427b010.chunk.js": "/nwitter/static/js/1.8427b010.chunk.js",
+  "static/js/1.8427b010.chunk.js.map": "/nwitter/static/js/1.8427b010.chunk.js.map",
+  "runtime~main.js": "/nwitter/static/js/runtime~main.09f57dde.js",
+  "runtime~main.js.map": "/nwitter/static/js/runtime~main.09f57dde.js.map",
+  "static/css/main.17fae33f.chunk.css.map": "/nwitter/static/css/main.17fae33f.chunk.css.map",
+  "index.html": "/nwitter/index.html",
+  "precache-manifest.f95ce0fc5055a0f48f69b81ac053608c.js": "/nwitter/precache-manifest.f95ce0fc5055a0f48f69b81ac053608c.js",
+  "service-worker.js": "/nwitter/service-worker.js"
+}
